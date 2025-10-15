@@ -1,0 +1,44 @@
+POST_NAME = "Custom Next Wave Minimal (mm)(*.tap)"
+FILE_EXTENSION = "tap"
+UNITS = "MM"
+LINE_ENDING = "[13][10]"
+LINE_NUMBER_START = 0
+LINE_NUMBER_INCREMENT = 10
+LINE_NUMBER_MAXIMUM = 999999
+
+VAR LINE_NUMBER = [N|A|N|1.0]
+VAR SPINDLE_SPEED = [S|A|S|1.0]
+VAR CUT_RATE = [FC|A|F|1.1]
+VAR PLUNGE_RATE = [FP|A|F|1.1]
+VAR X_POSITION = [X|A| X|1.3]
+VAR Y_POSITION = [Y|A| Y|1.3]
+VAR Z_POSITION = [Z|A| Z|1.3]
+VAR X_HOME_POSITION = [XH|A| X|1.3]
+VAR Y_HOME_POSITION = [YH|A| Y|1.3]
+VAR Z_HOME_POSITION = [ZH|A| Z|1.3]
+
+begin HEADER
+"G90"
+"G21"
+"[FC]"
+"G0 [ZH]"
+
+begin RAPID_MOVE
+"[FC]"
+"G00[X][Y][Z]"
+
+begin PLUNGE_MOVE
+"[FP]"
+"G1[X][Y][Z]"
+
+begin FIRST_FEED_MOVE
+"[FC]"
+"G01[X][Y][Z]"
+
+begin FEED_MOVE
+"G01[X][Y][Z]"
+
+begin FOOTER
+"G00 [ZH]"
+"G00 [XH] [YH]"
+"M02"
